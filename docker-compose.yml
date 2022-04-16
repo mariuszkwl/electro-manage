@@ -1,0 +1,13 @@
+version: "0.1"
+services:
+  electro-manage:
+    container_name: electro-manage
+    hostname: electro-manage
+    image: postgres
+    ports:
+      - "54321:5432"
+    restart: unless-stopped
+    env_file:
+      - dbcredentials.env
+    volumes:
+      - electro-manage-db/:/var/lib/postgresql/data/
