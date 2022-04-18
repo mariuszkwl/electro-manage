@@ -1,9 +1,8 @@
 package com.gmail.mariuszkwl.electromanage;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.sun.istack.NotNull;
+
+import javax.persistence.*;
 
 @Entity
 public class Client {
@@ -12,9 +11,17 @@ public class Client {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @Column
+    @NotNull
     private String firstName;
 
+    @Column
+    @NotNull
     private String lastName;
+
+    public Integer getId() {
+        return id;
+    }
 
     public String getFirstName() {
         return firstName;
