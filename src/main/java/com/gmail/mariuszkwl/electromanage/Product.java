@@ -36,10 +36,10 @@ public class Product {
 
     @Column
     @NotNull
-    private String buildingNumber;
+    private Integer buildingNumber;
 
     @Column
-    private String apartmentNumber;
+    private Integer apartmentNumber;
 
     @Column
     @NotNull
@@ -100,19 +100,19 @@ public class Product {
         this.street = street;
     }
 
-    public String getBuildingNumber() {
+    public Integer getBuildingNumber() {
         return buildingNumber;
     }
 
-    public void setBuildingNumber(String buildingNumber) {
+    public void setBuildingNumber(Integer buildingNumber) {
         this.buildingNumber = buildingNumber;
     }
 
-    public String getApartmentNumber() {
+    public Integer getApartmentNumber() {
         return apartmentNumber;
     }
 
-    public void setApartmentNumber(String apartmentNumber) {
+    public void setApartmentNumber(Integer apartmentNumber) {
         this.apartmentNumber = apartmentNumber;
     }
 
