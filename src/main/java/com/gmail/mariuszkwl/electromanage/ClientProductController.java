@@ -23,14 +23,12 @@ public class ClientProductController {
     @PostMapping("/add")
     @ResponseStatus(HttpStatus.CREATED)
     public void add(
-            @RequestParam("client") @NotNull String clientInfo,
-            @RequestParam("address") @NotNull String address,
-            @RequestParam("amount") @NotNull Integer amount,
-            @RequestParam("note") String note
+            ClientProduct clientProduct
     ) {
-        Client client = createClient(clientInfo);
+        Client client = createClient(clientProduct.getClient());
         if (client != null) {
-            Product product = createProduct(client, address, amount, note);
+            Product product = createProduct(client, clientProduct.getAddress(),
+                    clientProduct.getAmount(), clientProduct.getNote());
         }
 
     }
