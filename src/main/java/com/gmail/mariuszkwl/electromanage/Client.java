@@ -19,6 +19,13 @@ public class Client {
     @NotNull
     private String lastName;
 
+    protected Client() {}
+
+    public Client(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     public Integer getId() {
         return id;
     }

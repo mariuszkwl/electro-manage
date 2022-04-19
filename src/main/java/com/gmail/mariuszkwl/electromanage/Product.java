@@ -48,6 +48,24 @@ public class Product {
     @Column
     private String note;
 
+    protected Product() {}
+
+    public Product(
+            Client client, String country, Voivodeship voivodeship, String town, String zipCode, String street,
+            Integer buildingNumber, Integer apartmentNumber, Integer amount, String note
+    ) {
+        this.client = client;
+        this.country = country;
+        this.voivodeship = voivodeship;
+        this.town = town;
+        this.zipCode = zipCode;
+        this.street = street;
+        this.buildingNumber = buildingNumber;
+        this.apartmentNumber = apartmentNumber;
+        this.amount = amount;
+        this.note = note;
+    }
+
     public Integer getId() {
         return id;
     }
