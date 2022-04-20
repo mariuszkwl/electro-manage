@@ -1,4 +1,4 @@
-package com.gmail.mariuszkwl.electromanage;
+package com.gmail.mariuszkwl.electromanage.domain;
 
 public enum Voivodeship {
     DS("dolnośląskie"), KP("kujawsko-pomorskie"), LU("lubelskie"), LB("lubuskie"),

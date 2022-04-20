@@ -1,4 +1,4 @@
-package com.gmail.mariuszkwl.electromanage;
+package com.gmail.mariuszkwl.electromanage.domain;
 
 import com.sun.istack.NotNull;
 

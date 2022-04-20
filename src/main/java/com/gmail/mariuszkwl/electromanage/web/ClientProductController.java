@@ -1,6 +1,11 @@
-package com.gmail.mariuszkwl.electromanage;
+package com.gmail.mariuszkwl.electromanage.web;
 
 
+import com.gmail.mariuszkwl.electromanage.domain.Client;
+import com.gmail.mariuszkwl.electromanage.domain.Product;
+import com.gmail.mariuszkwl.electromanage.domain.Voivodeship;
+import com.gmail.mariuszkwl.electromanage.repo.ClientRepository;
+import com.gmail.mariuszkwl.electromanage.repo.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;

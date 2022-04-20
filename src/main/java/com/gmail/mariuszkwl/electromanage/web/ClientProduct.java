@@ -1,4 +1,4 @@
-package com.gmail.mariuszkwl.electromanage;
+package com.gmail.mariuszkwl.electromanage.web;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
