@@ -57,6 +57,26 @@ public class ClientProductController {
         }
     }
 
+    @PutMapping(path = "/modify/product")
+    @ResponseStatus(HttpStatus.OK)
+    public void  modifyProduct(Integer productId, ClientProduct clientProduct) {
+        Product product = verifyProduct(productId);
+        if (product != null) {
+            List<String> info = new ArrayList<>(7);
+            info.addAll(Arrays.asList(clientProduct.getAddress().split(", ")));
+            product.setCountry(info.get(0));
+            product.setVoivodeship(Voivodeship.findByLabel(info.get(1)));
+            product.setTown(info.get(2));
+            product.setZipCode(info.get(3));
+            product.setStreet(info.get(4));
+            product.setBuildingNumber(Integer.parseInt(info.get(5)));
+            product.setApartmentNumber(Integer.parseInt(info.get(6)));
+            product.setAmount(clientProduct.getAmount());
+            product.setNote(clientProduct.getNote());
+            productRepository.save(product);
+        }
+    }
+
     private Client createClient(String clientInfo) {
         Client client;
         List<String> info = new ArrayList<>(2);
@@ -87,11 +107,19 @@ public class ClientProductController {
         return product;
     }
 
-    public Client verifyClient(Integer clientId) {
+    private Client verifyClient(Integer clientId) {
         Client client = null;
         if (clientRepository.findById(clientId).isPresent()) {
             client = clientRepository.findById(clientId).get();
         }
         return client;
+    }
+
+    private Product verifyProduct(Integer productId) {
+        Product product = null;
+        if (productRepository.findById(productId).isPresent()) {
+            product = productRepository.findById(productId).get();
+        }
+        return product;
     }
 }
