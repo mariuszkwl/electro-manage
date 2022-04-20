@@ -9,12 +9,12 @@ import com.gmail.mariuszkwl.electromanage.repo.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ClientProductController {
@@ -39,6 +39,21 @@ public class ClientProductController {
             return new HttpEntity<>(new ClientProductIds(client.getId(), product.getId()));
         } else {
             return new HttpEntity<>(new ClientProductIds(-1, -1));
+        }
+    }
+
+    @PutMapping(path = "/modify/client")
+    @ResponseStatus(HttpStatus.OK)
+    public void  modifyClient(Integer clientId, String clientInfo) {
+        Client client = verifyClient(clientId);
+        if (client != null) {
+            List<String> info = new ArrayList<>(2);
+            info.addAll(Arrays.asList(clientInfo.split(", ")));
+            if (info.get(0) != null && info.get(1) != null) {
+                client.setFirstName(info.get(0));
+                client.setLastName(info.get(1));
+                clientRepository.save(client);
+            }
         }
     }
 
@@ -70,5 +85,13 @@ public class ClientProductController {
                     amount, note));
         }
         return product;
+    }
+
+    public Client verifyClient(Integer clientId) {
+        Client client = null;
+        if (clientRepository.findById(clientId).isPresent()) {
+            client = clientRepository.findById(clientId).get();
+        }
+        return client;
     }
 }
