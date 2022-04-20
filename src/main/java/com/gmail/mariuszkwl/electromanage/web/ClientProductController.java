@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class ClientProductController {
@@ -94,6 +93,33 @@ public class ClientProductController {
                 }
             }
         }
+    }
+
+    @GetMapping(path = "/show")
+    public List<ClientProduct> show() {
+        Client client = null;
+        List<ClientProduct> clientProducts = new ArrayList<>();
+        for (Product product : productRepository.findAll()) {
+            if (productRepository.findById(product.getId()).isPresent()) {
+                client = productRepository.findById(product.getId()).get().getClient();
+            }
+            String clientInfo = null;
+            if (client != null) {
+                clientInfo = client.getFirstName() + ", " + client.getLastName();
+            }
+            String address = product.getCountry() + ", " + product.getVoivodeship() + ", " + product.getTown() +
+                    ", " + product.getZipCode() + ", " + product.getStreet() + ", " + product.getBuildingNumber();
+            if (product.getApartmentNumber() != null) {
+                address = address.concat(", " + product.getApartmentNumber());
+            }
+            Integer amount = product.getAmount();
+            String note = null;
+            if (product.getNote() != null) {
+                note = product.getNote();
+            }
+            clientProducts.add(new ClientProduct(clientInfo, address, amount, note));
+        }
+        return clientProducts;
     }
 
     private Client createClient(String clientInfo) {
