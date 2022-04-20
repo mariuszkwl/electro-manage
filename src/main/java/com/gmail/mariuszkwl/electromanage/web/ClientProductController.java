@@ -7,7 +7,9 @@ import com.gmail.mariuszkwl.electromanage.domain.Voivodeship;
 import com.gmail.mariuszkwl.electromanage.repo.ClientRepository;
 import com.gmail.mariuszkwl.electromanage.repo.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,14 +27,18 @@ public class ClientProductController {
 
 
     @PostMapping("/add")
-    @ResponseStatus(HttpStatus.CREATED)
-    public void add(
-            ClientProduct clientProduct
-    ) {
+    @ResponseStatus(HttpStatus.OK)
+    public HttpEntity<ClientProductIds> add(ClientProduct clientProduct) {
+        Product product = null;
         Client client = createClient(clientProduct.getClient());
         if (client != null) {
-            Product product = createProduct(client, clientProduct.getAddress(),
+            product = createProduct(client, clientProduct.getAddress(),
                     clientProduct.getAmount(), clientProduct.getNote());
+        }
+        if (client != null){
+            return new HttpEntity<>(new ClientProductIds(client.getId(), product.getId()));
+        } else {
+            return new HttpEntity<>(new ClientProductIds(-1, -1));
         }
     }
 
