@@ -77,6 +77,25 @@ public class ClientProductController {
         }
     }
 
+    @DeleteMapping(path = "/delete/product")
+    @ResponseStatus(HttpStatus.OK)
+    public void  deleteProduct(Integer productId) {
+        Client client = null;
+        Product product = verifyProduct(productId);
+        if (product != null) {
+            if (productRepository.findById(productId).isPresent()) {
+                client = productRepository.findById(productId).get().getClient();
+            }
+            productRepository.delete(productRepository.findById(productId).get());
+            List<Product> productList = productRepository.findByClient(client).stream().toList();
+            if (productList.isEmpty() && client != null) {
+                if (clientRepository.findById(client.getId()).isPresent()) {
+                    clientRepository.delete(clientRepository.findById(client.getId()).get());
+                }
+            }
+        }
+    }
+
     private Client createClient(String clientInfo) {
         Client client;
         List<String> info = new ArrayList<>(2);
