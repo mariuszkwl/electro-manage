@@ -1,8 +1,7 @@
 package com.gmail.mariuszkwl.electromanage;
 
-import com.sun.istack.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@RestController("/electro-manage")
+@RestController
 public class ClientProductController {
 
     @Autowired
@@ -30,7 +29,6 @@ public class ClientProductController {
             Product product = createProduct(client, clientProduct.getAddress(),
                     clientProduct.getAmount(), clientProduct.getNote());
         }
-
     }
 
     private Client createClient(String clientInfo) {
